@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Medikal - ARC Helyum Plazma Profesyonel Sunum</title>
+    <style>
+        /* --- GENEL AYARLAR VE TİPOGRAFİ --- */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Open+Sans:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); /* Soft gri-mavi medikal tonlar */
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a3c5e; /* Koyu Lacivert */
+        }
+
+        /* --- LOGO --- */
+        .logo-container {
+            position: fixed;
+            top: 30px;
+            left: 40px;
+            z-index: 1000;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .logo-container img {
+            height: 250px; /* İstediğiniz büyük boyut */
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- SLAYT / SAYFA YAPISI --- */
+        .slide-section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 5% 40px; /* Üstten logo payı */
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            page-break-after: always; /* Yazıcı için sayfa sonu */
+        }
+
+        /* --- İÇERİK KARTI TASARIMI (DOLU GÖRÜNÜM) --- */
+        .content-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Yumuşak derinlik */
+            max-width: 1000px;
+            width: 100%;
+            margin-bottom: 2rem;
+            border-left: 5px solid #007bff; /* Sol tarafta aksent çizgi */
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px); /* Hover efekt */
+        }
+
+        .content-card h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+            color: #0056b3;
+        }
+
+        .content-card p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+            text-align: justify;
+        }
+
+        /* Detay Listeleri */
+        .feature-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Çift kolon */
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .feature-list li {
+            list-style: none;
+            position: relative;
+            padding-left: 25px;
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        .feature-list li::before {
+            content: '✔'; /* Tik ikonu */
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        /* --- GÖRSEL ALANI --- */
+        .visual-area {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .visual-area img {
+            max-width: 100%;
+            max-height: 50vh;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            object-fit: contain;
+            background: #fff;
+            padding: 10px; /* Çerçeve etkisi */
+        }
+        
+        /* --- TEKNİK LİSTE BÖLÜMÜ --- */
+        .technical-section .content-card {
+            border-left-color: #dc3545; /* Kırmızı aksent */
+        }
+        
+        .technical-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .tech-box h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #c0392b;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tech-box ul li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            border-left: 3px solid #e2e6ea;
+        }
+
+        /* --- SON SAYFA: İLETİŞİM VE MEDYA --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        /* Video Kutusu */
+        .video-wrapper {
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* İletişim Detayları */
+        .contact-info-box h3 {
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .info-item strong {
+            color: #0056b3;
+        }
+
+        /* QR Kod Kutusu */
+        .qr-container {
+            text-align: center;
+            margin-top: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .qr-container img {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .qr-container p {
+            font-weight: bold;
+            color: #E1306C; /* Instagram Rengi */
+            margin: 0;
+        }
+
+        .footer-note {
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #777;
+            text-align: center;
+        }
+
+        /* --- PDF VE YAZICI AYARLARI (KAYMAYI ÖNLEYEN KISIM) --- */
+        @media print {
+            @page {
+                size: A4;
+                margin: 0; /* Kenar boşluklarını sıfırla */
+            }
+            
+            body, html {
+                background: #fff;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                -webkit-print-color-adjust: exact; /* Arka plan renklerini bas */
+            }
+
+            /* Logoyu PDF'te küçült ki içeriği kapatmasın */
+            .logo-container {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+            }
+            .logo-container img {
+                height: 60px !important; /* PDF'te logo boyutu */
+            }
+
+            .slide-section {
+                height: 100vh; /* Her bölümü bir sayfa yap */
+                page-break-after: always !important; /* Sayfa sonu zorla */
+                break-after: page !important;
+                page-break-inside: avoid !important; /* İçeriği bölme */
+                padding: 40px 20px !important; /* Baskı için padding ayarı */
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start; /* İçeriği yukarıdan başlat */
+                border: none;
+            }
+
+            .content-card {
+                box-shadow: none; /* Baskıda gölge kötü çıkar */
+                border: 1px solid #ddd;
+                padding: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .visual-area img {
+                max-height: 35vh; /* Resimleri sayfaya sığdır */
+                box-shadow: none;
+            }
+
+            /* Video yerine kapak resmi veya uyarı */
+            .video-wrapper {
+                border: 1px solid #eee;
+            }
+        }
+
+        /* --- MOBİL AYARLARI --- */
+        @media (max-width: 768px) {
+            .logo-container img { height: 60px; }
+            .content-card { padding: 1.5rem; }
+            .feature-list { grid-template-columns: 1fr; }
+            .content-card h2 { font-size: 1.5rem; }
+            .visual-area img { max-height: 35vh; }
+            
+            /* İletişim Mobili */
+            .contact-grid { grid-template-columns: 1fr; }
+            .video-wrapper { margin-bottom: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo-container">
+        <img src="logo.png" alt="Focus Medikal Logo">
+    </div>
+
+    <section class="slide-section">
+        <div class="content-card">
+            <h2>ARC Helyum Plazma Teknolojisi</h2>
+            <p>
+                ARC Helyum Plazma, maddenin dördüncü hali olan plazma enerjisini helyum gazı desteğiyle kullanarak, cilde temas etmeden kontrollü bir biyo-uyarım sağlayan ileri seviye bir medikal estetik sistemidir. Gazların iyonize edilmesiyle oluşan bu enerji, cilt yüzeyinde süblimasyon (buharlaşma) oluşturarak kontrollü doku yenilenmesi sağlar.
+            </p>
+            <ul class="feature-list">
+                <li><strong>Helyum Gazının Rolü:</strong> Enerjinin stabil ve odaklı iletilmesini sağlar, ısı yayılımını kontrol altında tutarak çevre dokuları korur.</li>
+                <li><strong>Temassız Uygulama:</strong> Cihaz ucu cilde temas etmez, arada oluşan elektrik arkı ile işlem yapılır.</li>
+                <li><strong>Çifte Etki:</strong> Cildin üst tabakasını yenilerken, alt katmanlarda (dermis) güçlü bir sıkılaşma başlatır.</li>
+                <li><strong>Güvenli Teknoloji:</strong> Düşük sıcaklıkta iyonize gaz kullanımı ile termal hasar riski minimize edilmiştir.</li>
+            </ul>
+        </div>
+        <div class="visual-area">
+            <img src="image_6f66fc.jpg" alt="ARC Helyum Plazma Cihazı">
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="content-card">
+            <h2>Leke Tedavisi ve Cilt Tonu Eşitleme</h2>
+            <p>
+                Güneş lekeleri, yaşlılık lekeleri ve pigmentasyon bozukluklarında ARC Helyum Plazma, keratinosit tabakasını buharlaştırarak lekeli dokuyu kontrollü bir şekilde uzaklaştırır. İşlem sonrası alttan gelen taze ve sağlıklı doku sayesinde cilt tonu eşitlenir.
+            </p>
+            <ul class="feature-list">
+                <li>Sedef lekesi ve inatçı pigmentasyon sorunlarında etkilidir.</li>
+                <li>Cilt tonunu dengeler, lekelerin belirginliğini hafifletir.</li>
+                <li>Melanin üretimini düzenleyerek leke oluşumunu baskılar.</li>
+                <li>Tek seansta bile gözle görülür ton açılması sağlar.</li>
+            </ul>
+        </div>
+        <div class="visual-area">
+            <img src="image_6f67b6.jpg" alt="Leke Tedavisi Uygulaması">
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="content-card">
+            <h2>Yüz Toparlama ve Lifting Etkisi</h2>
+            <p>
+                Plazma enerjisinin yarattığı termal etki, cilt altındaki kolajen ve elastin liflerini kısaltarak anında bir "sıkılaşma" (shrinking) etkisi yaratır. Uzun vadede ise yeni kolajen üretimini (neokollajenez) tetikleyerek cildin elastikiyetini artırır.
+            </p>
+            <ul class="feature-list">
+                <li>Yüz kontürünü belirginleştirir (V-Shape etkisi).</li>
+                <li>Sarkmış dokuyu toparlar, lifting etkisi sağlar.</li>
+                <li>Gözenekleri sıkılaştırır ve cilt kalitesini artırır.</li>
+                <li>Mikrobiyal temizleyici etkisiyle cildi arındırır.</li>
+            </ul>
+        </div>
+        <div class="visual-area">
+            <img src="image_6f67af.jpg" alt="Yüz Lifting ve Gençleştirme">
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="content-card">
+            <h2>Göz Çevresi ve İnce Kırışıklıklar</h2>
+            <p>
+                Cildin en hassas bölgelerinden olan göz çevresinde güvenle uygulanabilen nadir teknolojilerdendir. Cerrahi müdahaleye gerek kalmadan, göz kapağı düşüklüğü ve kaz ayağı çizgilerinde ameliyatsız blefaroplasti etkisi yaratır.
+            </p>
+            <ul class="feature-list">
+                <li>Göz çevresindeki ince çizgileri (kaz ayakları) açar.</li>
+                <li>Göz kapağı üzerindeki fazla deriyi toparlar.</li>
+                <li>Dudak üstü ve alın çizgilerinde pürüzsüzlük sağlar.</li>
+                <li>Mimik çizgilerinin derinleşmesini engeller.</li>
+            </ul>
+        </div>
+        <div class="visual-area">
+            <img src="image_6f6791.jpg" alt="Kaz Ayakları ve Kırışıklık">
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="content-card">
+            <h2>Vücut Çatlaklarının Onarımı</h2>
+            <p>
+                Hızlı kilo alıp verme veya hamilelik sonrası oluşan stria (çatlak) dokusunu onarır. Plazma enerjisi, çatlak hattı boyunca kontrollü hasar oluşturarak, cildin kendini onarma mekanizmasını devreye sokar ve çatlak görünümünü daraltır.
+            </p>
+            <ul class="feature-list">
+                <li>Çatlakların genişliğini ve derinliğini azaltır.</li>
+                <li>Çatlak rengini cilt tonuna yaklaştırır.</li>
+                <li>Karın, bacak ve kalça bölgesinde güvenle uygulanır.</li>
+                <li>Doku bütünlüğünü destekleyerek cildi sıkılaştırır.</li>
+            </ul>
+        </div>
+        <div class="visual-area">
+            <img src="image_6f6773.jpg" alt="Vücut Çatlak Tedavisi">
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="content-card">
+            <h2>Göz Altı Bakım ve Onarımı</h2>
+            <p>
+                Yorgun ifadeye sebep olan göz altı torbaları, morluklar ve gevşemiş deri dokusu üzerinde sıkılaştırıcı etki gösterir. Göz altındaki yağ bezesi (ksantelazma) ve miliacıkların tedavisinde de nokta atışı çözüm sunar.
+            </p>
+            <ul class="feature-list">
+                <li>Göz altı torbalarını sıkılaştırarak görünümü hafifletir.</li>
+                <li>Göz kenarlarındaki yağ bezelerini (koleksiyonları) buharlaştırır.</li>
+                <li>Daha dinç ve aydınlık bir bakış kazandırır.</li>
+                <li>Hassas göz altı derisini kalınlaştırır ve direncini artırır.</li>
+            </ul>
+        </div>
+        <div class="visual-area">
+            <img src="image_6f6756.jpg" alt="Göz Altı Uygulaması">
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="content-card">
+            <h2>Ameliyat İzi ve İyileşmeyen Yaralar</h2>
+            <p>
+                Travmatik izler, ameliyat skarları ve jilet izleri gibi deformasyonlarda doku remodelizasyonu (yeniden şekillenme) sağlar. Plazma enerjisi, skar dokusunu yumuşatır ve sağlıklı deri ile yer değiştirmesini tetikler.
+            </p>
+            <ul class="feature-list">
+                <li>Hipertrofik (kabarık) yara izlerini düzleştirir.</li>
+                <li>Yara izinin rengini normal cilt rengine döndürür.</li>
+                <li>İyileşmeyen kronik yaraların kapanma sürecini hızlandırır.</li>
+                <li>Keloid yatkınlığı olmayanlarda güvenli skar revizyonu sağlar.</li>
+            </ul>
+        </div>
+        <div class="visual-area">
+            <img src="image_6f6733.jpg" alt="Yara İzi Tedavisi Başlangıç">
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="content-card">
+            <h2>Tedavi Sonuçları ve Doku İyileşmesi</h2>
+            <p>
+                ARC Helyum Plazma uygulamaları, doğal iyileşme sürecini desteklediği için sonuçlar kalıcı ve doğaldır. İlk seanstan itibaren başlayan doku yenilenmesi, takip eden haftalarda kolajen üretiminin artmasıyla maksimum seviyeye ulaşır.
+            </p>
+            <ul class="feature-list">
+                <li>Cilt kalitesinde genel bir artış gözlenir.</li>
+                <li>İşlem izleri (küçük kabuklanmalar) 7-10 gün içinde dökülür.</li>
+                <li>Doğru bakım ile pürüzsüz ve canlı bir cilt ortaya çıkar.</li>
+                <li>Hasta memnuniyeti yüksek, yan etki riski düşüktür.</li>
+            </ul>
+        </div>
+        <div class="visual-area">
+            <img src="image_6f6718.jpg" alt="Tedavi Sonrası İyileşme">
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="content-card">
+            <h2>Akne ve Sivilce Tedavisi</h2>
+            <p>
+                Plazma enerjisi, cilt yüzeyindeki bakterileri (P. acnes) yok eden güçlü bir sterilizasyon etkisine sahiptir. Aktif sivilceleri kuruturken, aynı zamanda yağ salgısını (sebum) dengeler ve gözenekleri sıkılaştırarak yeni sivilce oluşumunu engeller.
+            </p>
+            <ul class="feature-list">
+                <li>İltihaplı akneleri kurutur ve söndürür.</li>
+                <li>Akne sonrası kalan kırmızı/kahverengi lekeleri giderir.</li>
+                <li>Cildin bakteriyel florasını düzenler.</li>
+                <li>Sivilce çukurlarının (skar) dolmasını destekler.</li>
+            </ul>
+        </div>
+        <div class="visual-area">
+            <img src="1.jpg" alt="Akne Tedavisi">
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="content-card">
+            <h2>Mantar Kaynaklı Cilt Problemleri</h2>
+            <p>
+                Dirençli cilt ve tırnak mantarlarında destekleyici tedavi olarak kullanılır. Plazmanın iyonize gaz yapısı, mantar sporlarını ve hücre duvarlarını parçalayarak enfeksiyonun giderilmesine yardımcı olur.
+            </p>
+            <ul class="feature-list">
+                <li>Antimikrobiyal etkisi ile mantarı temizler.</li>
+                <li>İlaç tedavisine destek olarak iyileşmeyi hızlandırır.</li>
+                <li>Kaşıntı ve irritasyonu azaltır.</li>
+                <li>Cilt bütünlüğünü korur.</li>
+            </ul>
+        </div>
+        <div class="visual-area">
+            <img src="2.jpg" alt="mantar tedavisi">
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="content-card">
+            <h2>Dudak Üstü Barkod Çizgileri</h2>
+            <p>
+                Sigara içimi veya yaşlanmaya bağlı olarak dudak üstünde oluşan dikey çizgilerin (barkod çizgileri) tedavisinde etkilidir. Dolgu uygulamalarına gerek kalmadan veya dolgu ile kombine edilerek bölgenin pürüzsüzleşmesini sağlar.
+            </p>
+            <ul class="feature-list">
+                <li>Derinleşmiş dikey çizgileri açar.</li>
+                <li>Dudak kontürünü belirginleştirir.</li>
+                <li>Daha genç ve dolgun bir dudak çevresi görünümü sağlar.</li>
+                <li>İnce uç yapısı ile hassas çalışma imkanı sunar.</li>
+            </ul>
+        </div>
+        <div class="visual-area">
+             <img src="3.jpg" alt="barkod çizgileri">
+        </div>
+    </section>
+
+    <section class="slide-section technical-section">
+        <div class="content-card">
+            <h2>Profesyonel Uygulama Protokolü ve Uyarılar</h2>
+            <p>
+                ARC Helyum Plazma uygulamalarında maksimum başarı ve güvenlik için aşağıdaki protokol ve kontrendikasyonlara harfiyen uyulmalıdır.
+            </p>
+            
+            <div class="technical-grid">
+                <div class="tech-box">
+                    <h3>⛔ Kontrendikasyonlar (Uygulanmaz)</h3>
+                    <ul>
+                        <li>Kalp pili (Pacemaker) taşıyanlar.</li>
+                        <li>Aktif kanser hastaları ve kemoterapi süreci.</li>
+                        <li>Keloid (aşırı skar) yatkınlığı olanlar.</li>
+                        <li>Hamileler ve emziren anneler.</li>
+                        <li>Epilepsi (sara) hastalığı geçmişi olanlar.</li>
+                        <li>Vitiligo veya aktif cilt enfeksiyonu olanlar.</li>
+                        <li>Alerjik reaksiyon riski çok yüksek kişiler.</li>
+                    </ul>
+                </div>
+
+              
+                <div class="tech-box">
+                    <h3>🛡️ İşlem Sonrası Bakım</h3>
+                    <ul>
+                        <li>İlk 24 saat su teması yasaktır.</li>
+                        <li>Güneşten mutlak korunma (SPF 50+) şarttır.</li>
+                        <li>Kabuklar elle koparılmamalı, kendiliğinden düşmelidir.</li>
+                        <li>Önerilen nemlendirici ve epitelyan kremler aksatılmamalıdır.</li>
+                        <li>Hamam, sauna gibi aşırı sıcak ortamlardan kaçınılmalıdır.</li>
+                        <li>Bölgeye kimyasal peeling veya asitli ürün sürülmemelidir.</li>
+                    </ul>
+                </div>
+
+              
+                 <div class="tech-box">
+                    <h3>⚙️ Uygulama Yöntemi</h3>
+                    <ul>
+                        <li><strong>Hijyen:</strong> Bölge makyaj, krem ve kirden tamamen arındırılmalıdır.</li>
+                        <li><strong>Mesafe:</strong> Cihaz ucu cilde DEĞDİRİLMEZ, 1-2 mm mesafeden atış yapılır.</li>
+                        <li><strong>Enerji:</strong> Cilt tipi ve endikasyona göre uygun joule/enerji seçilir.</li>
+                        <li><strong>Süre:</strong> Bölgenin genişliğine göre seans süresi belirlenir.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide-section">
+        <div class="content-card contact-section">
+            <h2>Uygulama Videosu & İletişim</h2>
+            <p>
+                Cihazın uygulama yöntemini izleyebilir veya detaylı bilgi ve randevu için bizimle iletişime geçebilirsiniz.
+            </p>
+            
+            <div class="contact-grid">
+                
+                <div class="video-wrapper">
+                    <video controls poster="video_kapak.jpg">
+                        <source src="video.mp4" type="video/mp4">
+                        Tarayıcınız video etiketini desteklemiyor.
+                    </video>
+                </div>
+
+                <div class="contact-info-box">
+                    <h3>Bize Ulaşın</h3>
+                    
+                    <div class="info-item">
+                        <strong>Focus Medikal</strong><br>
+                        Gaziantep / Şehitkamil 
+                    </div>
+                  NURHAYAT ÇAYIRGAN
+                    <div class="info-item">
+                        <strong>Telefon:</strong><br>
+                        +90 552 605 48 55
+                    </div>
+
+                    <div class="qr-container">
+                        <img src="instagram_qr.png" alt="Instagram QR Kodu">
+                        <p>@focusmedikal</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer-note">
+            © 2026 Focus Medikal - Tüm Hakları Saklıdır.
+        </div>
+    </section>
+
+</body>
+</html>
