@@ -42,7 +42,7 @@
         }
 
         .logo-container img {
-            height: 250px; 
+            height: 320px; /* GÜNCELLENDİ: Logo boyutu büyütüldü */
             width: auto;
             transition: transform 0.3s ease;
         }
@@ -139,6 +139,29 @@
             background: #fff;
             padding: 10px; 
         }
+
+        /* İlk görseli veya tam sayfa görselleri büyütmek için özel sınıf */
+        .visual-area.large-intro img {
+            max-height: 65vh; 
+            width: 100%;
+        }
+
+        /* Yan yana görseller için grid yapısı */
+        .comparison-area {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .comparison-area img {
+            width: calc(50% - 10px);
+            height: auto;
+            max-height: 45vh;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            object-fit: cover;
+        }
         
         /* --- TEKNİK LİSTE BÖLÜMÜ --- */
         .technical-section .content-card {
@@ -224,8 +247,8 @@
 
         .qr-container p {
             font-weight: bold;
-            color: #E1306C; 
-            margin: 0;
+            color: #E1306C; /* Instagram Pembesi Rengi */
+            margin: 5px 0;
         }
 
         .footer-note {
@@ -253,7 +276,7 @@
                 left: 10px;
             }
             .logo-container img {
-                height: 60px !important; 
+                height: 80px !important; /* Printte logo çok büyük olmasın */
             }
             .slide-section {
                 height: 100vh; 
@@ -272,27 +295,27 @@
                 padding: 1.5rem;
                 margin-bottom: 1rem;
             }
-            .visual-area img {
+            .visual-area img, .comparison-area img {
                 max-height: 35vh; 
                 box-shadow: none;
             }
         }
 
         @media (max-width: 768px) {
-            .logo-container img { height: 60px; }
+            .logo-container img { height: 80px; } /* Mobilde logo boyutu */
             .content-card { padding: 1.5rem; }
             .feature-list { grid-template-columns: 1fr; }
             .content-card h2 { font-size: 1.5rem; }
-            .visual-area img { max-height: 35vh; }
+            .comparison-area { flex-direction: column; }
+            .comparison-area img { width: 100%; }
             .contact-grid { grid-template-columns: 1fr; }
-            .video-wrapper { margin-bottom: 30px; }
         }
     </style>
 </head>
 <body>
 
     <div class="logo-container">
-        <img src="logo.png" alt="Focus Medikal Logo">
+        <img src="logo.jpg" alt="Focus Medikal Logo">
     </div>
 
     <section class="slide-section">
@@ -308,7 +331,7 @@
                 <li>Çevre dokulara zarar vermeden odaklı işlem yapar.</li>
             </ul>
         </div>
-        <div class="visual-area">
+        <div class="visual-area large-intro"> 
             <img src="image_6f66fc.jpg" alt="ARC Helyum Plazma Giriş">
         </div>
     </section>
@@ -327,7 +350,7 @@
             </ul>
         </div>
         <div class="visual-area">
-            <img src="image_6f67b6.jpg" alt="Helyum Gazı Avantajları">
+            <img src="6.jpg" alt="Helyum Gazı Teknolojisi">
         </div>
     </section>
 
@@ -363,25 +386,7 @@
             </ul>
         </div>
         <div class="visual-area">
-            <img src="image_6f6791.jpg" alt="Leke Tedavisi">
-        </div>
-    </section>
-
-    <section class="slide-section">
-        <div class="content-card">
-            <h2>Yüz Toparlama</h2>
-            <p>
-                Yaşla birlikte oluşan sarkmaları ameliyatsız bir yöntemle toparlamak ve yüz ovalini belirginleştirmek için kullanılır.
-            </p>
-            <ul class="feature-list">
-                <li>Yüzdeki sarkmalar kontrollü şekilde toparlanır.</li>
-                <li>Yüz kontürü (jawline hattı) belirginleşir.</li>
-                <li>Genişlemiş gözenekler sıkılaşır.</li>
-                <li>Cilt elastikiyeti yeniden kazandırılır.</li>
-            </ul>
-        </div>
-        <div class="visual-area">
-            <img src="image_6f6773.jpg" alt="Yüz Toparlama">
+            <img src="image_6f67b6.jpg" alt="Leke Tedavisi">
         </div>
     </section>
 
@@ -399,27 +404,10 @@
             </ul>
         </div>
         <div class="visual-area">
-            <img src="image_6f6756.jpg" alt="Göz Çevresi">
+            <img src="PHOTO-2026-02-07-13-20-54.jpg" alt="Göz Çevresi Gençleştirme">
         </div>
     </section>
 
-    <section class="slide-section">
-        <div class="content-card">
-            <h2>Dudak Üstü Barkod Çizgileri</h2>
-            <p>
-                Sigara kullanımı veya yaşlanmaya bağlı oluşan dikey dudak çizgilerinde doku yenileme sağlar.
-            </p>
-            <ul class="feature-list">
-                <li>Derin dikey çizgiler yumuşar.</li>
-                <li>Dudak çevresi daha genç bir görünüm alır.</li>
-                <li>Dudak üstü dokusu pürüzsüzleşir.</li>
-                <li>Çizgilerin derinleşmesi durdurulur.</li>
-            </ul>
-        </div>
-        <div class="visual-area">
-            <img src="3.jpg" alt="Barkod Çizgileri">
-        </div>
-    </section>
 
     <section class="slide-section">
         <div class="content-card">
@@ -435,7 +423,7 @@
             </ul>
         </div>
         <div class="visual-area">
-            <img src="1.jpg" alt="Akne Tedavisi">
+            <img src="PHOTO-2026-02-07-13-25-04.jpg" alt="Akne Tedavisi Sonuçları">
         </div>
     </section>
 
@@ -452,44 +440,27 @@
                 <li>Skarlı dokunun rengi normal cilt tonuna yaklaştırılır.</li>
             </ul>
         </div>
-        <div class="visual-area">
-            <img src="image_6f6733.jpg" alt="Çatlak ve İzler">
+        <div class="comparison-area">
+            <img src="image_6f6733.jpg" alt="Yara İzi Öncesi">
+            <img src="image_6f6718.jpg" alt="Yara İzi Sonrası">
         </div>
     </section>
 
     <section class="slide-section">
         <div class="content-card">
-            <h2>Göz Altı Torba ve Milia</h2>
+            <h2>Yüz Toparlama ve Sarkma</h2>
             <p>
-                Göz altındaki torbalanmalar ve estetik görünümü bozan yağ bezeleri (milia) için nokta atışı çözüm sunar.
+                Yaşla birlikte oluşan sarkmaları ameliyatsız bir yöntemle toparlamak ve yüz ovalini belirginleştirmek için kullanılır.
             </p>
             <ul class="feature-list">
-                <li>Göz altı torba görünümü sıkılaştırılarak azaltılır.</li>
-                <li>Milia ve küçük yağ bezeleri buharlaştırılarak yok edilir.</li>
-                <li>Göz altı derisi daha sıkı bir yapıya kavuşur.</li>
-                <li>Aydınlık ve taze bir bakış sağlanır.</li>
+                <li>Yüzdeki sarkmalar kontrollü şekilde toparlanır.</li>
+                <li>Yüz kontürü (jawline hattı) belirginleşir.</li>
+                <li>Genişlemiş gözenekler sıkılaşır.</li>
+                <li>Cilt elastikiyeti yeniden kazandırılır.</li>
             </ul>
         </div>
         <div class="visual-area">
-            <img src="image_6f6718.jpg" alt="Göz Altı">
-        </div>
-    </section>
-
-    <section class="slide-section">
-        <div class="content-card">
-            <h2>İşlem Sonrası Süreç</h2>
-            <p>
-                Uygulama sonrasında cildin kendi onarım mekanizması devreye girer. Bu süreç tamamen doğaldır.
-            </p>
-            <ul class="feature-list">
-                <li>İşlem bölgesinde küçük kabuklanmalar oluşabilir.</li>
-                <li>Bu kabuklar 7–10 gün içinde kendiliğinden dökülür.</li>
-                <li>Cilt alttan tamamen yenilenmiş ve taze olarak gelir.</li>
-                <li>Sonuçlar, kolajen üretimiyle zamanla daha da güzelleşir.</li>
-            </ul>
-        </div>
-        <div class="visual-area">
-            <img src="2.jpg" alt="İyileşme Süreci">
+            <img src="5.jpg" alt="Yüz Toparlama">
         </div>
     </section>
 
@@ -512,16 +483,6 @@
                     </ul>
                 </div>
 
-                <div class="tech-box">
-                    <h3>🧴 İşlem Sonrası Bakım</h3>
-                    <ul>
-                        <li>İlk 24 saat bölgeye su değdirilmemelidir.</li>
-                        <li>Güneşten korunma (SPF 50+) mutlak şarttır.</li>
-                        <li>Oluşan kabuklar asla elle koparılmamalıdır.</li>
-                        <li>Asitli ürünler veya peeling kullanılmamalıdır.</li>
-                    </ul>
-                </div>
-
                  <div class="tech-box">
                     <h3>💡 Önemli Notlar</h3>
                     <ul>
@@ -536,6 +497,12 @@
     </section>
 
     <section class="slide-section">
+        <div class="visual-area large-intro">
+            <img src="7.jpg" alt="Focus Medikal Uygulama Görseli">
+        </div>
+    </section>
+
+    <section class="slide-section">
         <div class="content-card contact-section">
             <h2>Uygulama Videosu & İletişim</h2>
             <p>
@@ -545,7 +512,7 @@
             <div class="contact-grid">
                 
                 <div class="video-wrapper">
-                    <video controls poster="video_kapak.jpg">
+                    <video controls poster="1.jpg">
                         <source src="video.mp4" type="video/mp4">
                         Tarayıcınız video etiketini desteklemiyor.
                     </video>
@@ -565,8 +532,9 @@
                     </div>
 
                     <div class="qr-container">
-                        <img src="instagram_qr.png" alt="Instagram QR Kodu">
+                        <img src="instagram_qr.jpg" alt="Instagram QR Kodu">
                         <p>@focusmedikal</p>
+                        <p>bizi takip etmeyi unutmayınız</p>
                     </div>
                 </div>
 
